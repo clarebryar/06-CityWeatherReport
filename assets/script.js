@@ -2,16 +2,26 @@
 
 
 //this one is for the lat and lon to get the weather: 
-var apiLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=d91f911bcf2c0f925fb6535547a5ddc9'
+var apiLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=a4b52d54f93021519848eaf25cda8f87'
 
 //this one gets the weather icons you'll use: 
-var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'
+var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'  
+var cityNameInputEl = document.querySelector("#cityname");
+var searchButton = document.querySelector('#searchButton')
 
-//API Key
-//d91f911bcf2c0f925fb6535547a5ddc9
+var searchHandler = function (event) {
+    event.preventDefault();
+ var cityName = cityNameInputEl.value.trim();
+if (cityName) {
+    getCity(cityName)
+    console.log(cityName)
+} else {
+    document.querySelector('#notvalidcity').textContent = "sorry can't find that city"
+}
+}
 
-function getCity () {
-    var apiCity = 'https://api.openweathermap.org/geo/1.0/direct?q={cityname}&limit=5&appid=d91f911bcf2c0f925fb6535547a5ddc9';   
+function getCity (cityName) {
+    var apiCity = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + ',US&limit=5&appid=a4b52d54f93021519848eaf25cda8f87';   
     fetch(apiCity).then(function (response) {
         console.log(response.status);
        return response.json()
@@ -20,5 +30,8 @@ function getCity () {
         
     })
 })
-}
-getCity();
+};
+
+
+
+searchButton.addEventListener('click', searchHandler);
