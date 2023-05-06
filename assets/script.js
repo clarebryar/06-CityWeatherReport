@@ -30,9 +30,11 @@ function getCity (cityName) {
     })
 
 })
-var apiLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=a4b52d54f93021519848eaf25cda8f87'
+var getLatLon = function (lat, lon) {
+var cityLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&' + lon '={lon}&appid=a4b52d54f93021519848eaf25cda8f87'
+fetch(cityLatLon).then(function(response) )
 
-
+}
 };
 
 
