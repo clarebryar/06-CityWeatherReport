@@ -15,8 +15,6 @@ var searchHandler = function (event) {
 if (cityName) {
     getCity(cityName)
     console.log(cityName)
-} else if (cityName = [ ]){
-    document.querySelector('#notvalidcity').textContent = "sorry can't find that city"
 }
 }
 
@@ -25,17 +23,24 @@ function getCity (cityName) {
     fetch(apiCity).then(function (response) {
         console.log(response.status);
        return response.json()
-       .then(function (data) { 
+       .then(function (data)  {
+        var lat = data[0].lat 
+        var lon = data[0].lon
+        if (cityName.length === 0){
+            document.querySelector('#notvalidcity').textContent = "sorry can't find that city"
+        }
         console.log(data);        
     })
+    
 
 })
+};
 var getLatLon = function (lat, lon) {
-var cityLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&' + lon '={lon}&appid=a4b52d54f93021519848eaf25cda8f87'
+ var cityLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&' + lon '=&appid=a4b52d54f93021519848eaf25cda8f87&units=imperial';
 fetch(cityLatLon).then(function(response) )
 
 }
-};
+
 
 
 

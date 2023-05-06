@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+}
+
+header {
+    background: linear-gradient(#403ae7, #9198e5);
+    padding: 2em;
+   text-align: center;
+   color: bisque;
+margin-bottom: 1em;
+}
