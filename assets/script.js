@@ -2,7 +2,7 @@
 
 
 //this one is for the lat and lon to get the weather: 
-var apiLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=a4b52d54f93021519848eaf25cda8f87'
+
 
 //this one gets the weather icons you'll use: 
 var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'  
@@ -15,7 +15,7 @@ var searchHandler = function (event) {
 if (cityName) {
     getCity(cityName)
     console.log(cityName)
-} else {
+} else if (cityName = [ ]){
     document.querySelector('#notvalidcity').textContent = "sorry can't find that city"
 }
 }
@@ -26,10 +26,13 @@ function getCity (cityName) {
         console.log(response.status);
        return response.json()
        .then(function (data) { 
-        console.log(data);
-        
+        console.log(data);        
     })
+
 })
+var apiLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=a4b52d54f93021519848eaf25cda8f87'
+
+
 };
 
 
