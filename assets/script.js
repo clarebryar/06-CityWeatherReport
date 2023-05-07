@@ -40,7 +40,7 @@ fetch(cityLatLon).then(function (response) {
 console.log(response.status);
     return response.json().then(function (data) {
     console.log(data);
-for  (var i = 0; i < data.list.length; i++) {
+for  (var i = 0; i < data.list.length; i+=7) {
     var today = dayjs();
     var date = data.list[i].dt
     var dateAndTime = dayjs.unix(date).format('MMMM D, YYYY, hh:mm:ss')
@@ -49,6 +49,10 @@ for  (var i = 0; i < data.list.length; i++) {
    var windSpeed = data.list[i].wind.speed
     console.log(dateAndTime)
    console.log("Temp:", temp + " humidity:", humidity + " wind speed", windSpeed);
+   var icon = data.list[i].weather[0].icon
+   console.log(icon)
+
+
 }
 });
 })
