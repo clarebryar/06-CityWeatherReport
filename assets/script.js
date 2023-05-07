@@ -3,7 +3,7 @@
 
 //this one is for the lat and lon to get the weather: 
 
-
+var weatherCard = document.querySelector('#weatherCard')
 //this one gets the weather icons you'll use: 
 var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'  
 var cityNameInputEl = document.querySelector("#cityname");
@@ -43,7 +43,7 @@ console.log(response.status);
 for  (var i = 0; i < data.list.length; i+=7) {
     var today = dayjs();
     var date = data.list[i].dt
-    var dateAndTime = dayjs.unix(date).format('MMMM D, YYYY, hh:mm:ss')
+    var dateAndTime = dayjs.unix(date).format('MMMM D, YYYY')
    var temp = data.list[i].main.feels_like
    var humidity = data.list[i].main.humidity
    var windSpeed = data.list[i].wind.speed
@@ -51,11 +51,35 @@ for  (var i = 0; i < data.list.length; i+=7) {
    console.log("Temp:", temp + " humidity:", humidity + " wind speed", windSpeed);
    var icon = data.list[i].weather[0].icon
    console.log(icon)
+   
+  var dateEl = document.createElement('h3')
+  dateEl.textContent = dateAndTime
+weatherCard.appendChild(dateEl)
+  
+var tempEl = document.createElement('h4')
+  tempEl.textContent = "Temp: " + temp
+  weatherCard.appendChild(tempEl)
+  
+  var humidityEl = document.createElement('h5')
+  humidityEl.textContent = "Humidity: " + humidity + "%"
+  weatherCard.appendChild(humidityEl)
 
-
+  var windEl = document.createElement('h5')
+  windEl.textContent = "Wind Speed: " + windSpeed + "mph"
+  weatherCard.appendChild(windEl)
 }
 });
 })
 }
 
 searchButton.addEventListener('click', searchHandler);
+
+function getIcon(icon) {
+var apiIcons = 'https://api.openweathermap.org/img/w/' + icon + '.png'  
+fetch(apiIcons).then(function (response) {
+    console.log(response)
+return response.json().then(function (data) {
+ console.log(data)   
+})
+})
+}
