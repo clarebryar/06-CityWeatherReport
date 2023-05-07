@@ -44,11 +44,11 @@ for  (var i = 0; i < data.list.length; i++) {
     var today = dayjs();
     var date = data.list[i].dt
     var dateAndTime = dayjs.unix(date).format('MMMM D, YYYY, hh:mm:ss')
-   var tempFeelsLike = data.list[i].main.feels_like
+   var temp = data.list[i].main.feels_like
    var humidity = data.list[i].main.humidity
    var windSpeed = data.list[i].wind.speed
     console.log(dateAndTime)
-   console.log("Temp:", tempFeelsLike + " humidity:", humidity + " wind speed", windSpeed);
+   console.log("Temp:", temp + " humidity:", humidity + " wind speed", windSpeed);
 }
 });
 })
