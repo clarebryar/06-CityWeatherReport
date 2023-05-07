@@ -40,6 +40,31 @@ fetch(cityLatLon).then(function (response) {
 console.log(response.status);
     return response.json().then(function (data) {
     console.log(data);
+for  (var i = 0; i < data.length; i++) {
+    var weatherData = data.map(function ()
+    {
+      return list.main.feels_like;
+    })
+    console.log(data[i].list.main.feels_like);
+}
+    // const day1Temp = data.list[3].main.feels_like
+    // console.log("day 1 Temp:", day1Temp);
+    // const day1Humidity = data.list[3].main.humidity
+    // console.log("day 1 Humidity:", day1Humidity);
+    // const day1Wind = data.list[3].wind.speed 
+    // console.log("day 1 Wind Speed", day1Wind)
+    // const day2Temp = data.list[10].main.feels_like
+    // console.log("day 2Temp:", day2Temp);
+    // const day2Humidity = data.list[10].main.humidity
+    // console.log("day 2 Humidity:", day2Humidity);
+    // const day2Wind = data.list[10].wind.speed 
+    // console.log("day 2 Wind Speed", day2Wind)
+    // const day3Temp = data.list[19].main.feels_like
+    // console.log("day 2Temp:", day3Temp);
+    // const day3Humidity = data.list[19].main.humidity
+    // console.log("day 2 Humidity:", day3Humidity);
+    // const day3Wind = data.list[19].wind.speed 
+    // console.log("day 2 Wind Speed", day3Wind)
 });
 });
 };
