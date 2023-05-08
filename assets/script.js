@@ -5,6 +5,7 @@
 
 var weatherCard = document.querySelector('#weatherCard')
 var chosenCityEl = document.querySelector("#chosenCity")
+var citySearchHistory = document.querySelector('#citySearchHistory')
 //this one gets the weather icons you'll use: 
 var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'  
 var cityNameInputEl = document.querySelector("#cityname");
@@ -33,7 +34,12 @@ function getCity (cityName) {
         console.log(data);     
         getLatLon(lat, lon);   
         chosenCityEl.textContent = "Displaying weather for " + cityName
-        localStorage.setItem("city:", cityName); 
+        var blankArray = []
+        cityArray = blankArray.push(cityName)
+        localStorage.setItem( cityName, cityArray); 
+        var citySearchEl = document.createElement('button')
+        citySearchEl.textContent = localStorage.getItem(cityName)
+        citySearchHistory.appendChild(citySearchEl);
     })
     
 
