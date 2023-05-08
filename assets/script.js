@@ -1,9 +1,10 @@
 //this one is to get the lat and lon of a city: 
 
 
-//this one is for the lat and lon to get the weather: 
+
 
 var weatherCard = document.querySelector('#weatherCard')
+var chosenCityEl = document.querySelector("#chosenCity")
 //this one gets the weather icons you'll use: 
 var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'  
 var cityNameInputEl = document.querySelector("#cityname");
@@ -18,6 +19,8 @@ if (cityName) {
 } else if (cityName.length === 0) {
     document.querySelector('#notvalidcity').textContent = "sorry can't find that city"
 }
+
+weatherCard.textContent = ""
 }
 
 function getCity (cityName) {
@@ -29,6 +32,8 @@ function getCity (cityName) {
         const lon = data[0].lon
         console.log(data);     
         getLatLon(lat, lon);   
+        chosenCityEl.textContent = "Displaying weather for " + cityName
+        localStorage.setItem("city:", cityName); 
     })
     
 
