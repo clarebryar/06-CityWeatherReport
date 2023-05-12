@@ -5,24 +5,43 @@
 
 var weatherCard = document.querySelector('#weatherCard')
 var chosenCityEl = document.querySelector("#chosenCity")
-var citySearchHistory = document.querySelector('#citySearchHistory')
+var searchHistoryContainer = document.querySelector('#citySearchHistory')
 //this one gets the weather icons you'll use: 
 var apiIcons = 'https://api.openweathermap.org/img/w/{icon}.png'  
 var cityNameInputEl = document.querySelector("#cityname");
 var searchButton = document.querySelector('#searchButton')
 
+cityArray = []
+
+var searchHistoryBtn = document.createElement('button') 
+
 var searchHandler = function (event) {
     event.preventDefault();
- var cityName = cityNameInputEl.value.trim();
+ var cityName = cityNameInputEl.value.trim() 
 if (cityName) {
     getCity(cityName)
     console.log(cityName)
 } else if (cityName.length === 0) {
     document.querySelector('#notvalidcity').textContent = "sorry can't find that city"
 }
-
+cityArray.unshift(cityName)
+console.log(cityArray)
 weatherCard.textContent = ""
-}
+// for (var i = 0;  i < 5; i++) {
+//     var citySearch = cityArray[i]
+    var searchHistoryBtn = document.createElement('button')
+    searchHistoryBtn.setAttribute("class", "searchHistoryBtn")
+    
+    searchHistoryContainer.appendChild(searchHistoryBtn)
+    // localStorage.setItem("Search History", JSON.stringify(cityArray))
+    searchHistoryBtn.textContent = cityName
+    // JSON.parse(localStorage.getItem("Search History"));
+   searchHistoryBtn.addEventListener("onclick", getCity(cityName))
+};
+ 
+
+
+
 
 function getCity (cityName) {
     var apiCity = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + ',US&limit=5&appid=a4b52d54f93021519848eaf25cda8f87';   
@@ -34,17 +53,17 @@ function getCity (cityName) {
         console.log(data);     
         getLatLon(lat, lon);   
         chosenCityEl.textContent = "Displaying weather for " + cityName
-        var blankArray = []
-        cityArray = blankArray.push(cityName)
-        localStorage.setItem( cityName, cityArray); 
-        var citySearchEl = document.createElement('button')
-        citySearchEl.textContent = localStorage.getItem(cityName)
-        citySearchHistory.appendChild(citySearchEl);
-    })
-    
+
+       
+        
+    }) 
 
 })
 };
+
+
+
+
 var getLatLon = function (lat, lon) {
  var cityLatLon = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=a4b52d54f93021519848eaf25cda8f87&units=imperial`;
 fetch(cityLatLon).then(function (response) {
@@ -62,9 +81,12 @@ for  (var i = 0; i < data.list.length; i+=7) {
    console.log("Temp:", temp + " humidity:", humidity + " wind speed", windSpeed);
    var icon = data.list[i].weather[0].icon
    console.log(icon)
-   
+ 
+var weatherBox = document.createElement('div')
+
   var dateEl = document.createElement('h3')
   dateEl.textContent = dateAndTime
+
 weatherCard.appendChild(dateEl)
   
 var tempEl = document.createElement('h4')
@@ -94,3 +116,11 @@ return response.json().then(function (data) {
 })
 })
 }
+
+
+// function searchHistoryHandler (event) {
+//     event.preventDefault()
+//     getCity();
+// }
+
+
